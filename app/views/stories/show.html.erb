@@ -1,0 +1,19 @@
+<h1><%= @story.title %></h1>
+<ul>
+<% @story_lines.each do |line| %>
+<li><%= line.content %></li>
+<% end %>
+</ul>
+
+<%= form_for @new_submission do |f| %>
+<%= f.text_field :content %>
+<%= f.submit "Create Line" %>
+<% end %>
+
+<ul>
+<% @story_submissions.each do |submission| %>
+<li><%= submission.content %> <span>| Votes: <%= submission.votes %></li>
+<% end %>
+</ul>
+
+<%= link_to "All Stories", stories_url %>
