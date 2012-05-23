@@ -12,7 +12,20 @@
 
 <ul>
 <% @story_submissions.each do |submission| %>
-<li><%= submission.content %> <span>| Votes: <%= submission.votes %></li>
+<li><p>
+	<%= submission.content %>
+	</p>
+	<span>
+	<%= form_tag "/stories/#{params[:id]}/submission", :method => "put", :id => "vote" do %>
+		<%= hidden_field_tag "vote_count", 1 %>
+		<%= hidden_field_tag "submission_id", submission.id %>
+		<!-- I don't think the line below is doing anything... -->
+		<%= hidden_field_tag "user_id", :user_id %>
+		<%= submit_tag "Vote" %>
+	<% end %>
+	<%= submission.votes %>
+	</span>	
+</li>
 <% end %>
 </ul>
 
