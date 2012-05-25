@@ -1,4 +1,6 @@
 <% if @user && Invite.find_by_user_id_and_story_id(@user.id, params[:id]) %>
+
+
 <div id="content">
   <h1 id="story_title"><%= @story.title %></h1>
   <div id="story">
@@ -31,7 +33,6 @@
       <% end %>
     </ul>
 
-    
   </div><!-- #story -->
   <div class="bottom_pad"></div>
 </div><!-- #content -->  
@@ -49,8 +50,14 @@
   <% end %>
   <%= link_to "All Stories", root_url %>
 </div><!-- #sidebar -->
-    
+
 <% else %>
-<h2>YOU SHALL NOT PASSSS (Seriously, you aren't allowed to view this story.)</h2>
+<div id ="content">
+<h1 id="story_title">YOU SHALL NOT PASS!</h1>
+  <div id="story">
+		<p>Seriously, you aren't allowed to view this story.</p>
+	</div><!-- story -->
+	<div class="bottom_pad"></div>
+</div><!-- content -->
 <% end %>
 

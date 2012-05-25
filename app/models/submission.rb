@@ -3,7 +3,7 @@ class Submission < ActiveRecord::Base
   belongs_to :story
   belongs_to :user
   scope :by_votes, order: "votes DESC"  
-end
+
 
 
 def create_submission
@@ -53,4 +53,6 @@ def submission_to_line_create_new_story
   Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
   create_story
   redirect_to story_url  
+end
+
 end

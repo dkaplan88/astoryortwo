@@ -1,5 +1,12 @@
-<ul>
-<% @stories.each do |story| %>
-	<li><%= link_to story.title, story %></li>
-<% end %>
-</ul>
+<div id="content">
+	 <h1 id="story_title">All of our Stories</h1>
+	<div id="story">
+		<ul>
+		<% @stories.each do |story| %>
+			<li><%= link_to story.title, story %></li>
+		<% end %>
+		</ul>
+	</div><!-- #story -->
+	<div class="bottom_pad"></div>
+</div><!-- content -->
+
