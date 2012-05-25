@@ -1,13 +1,254 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
-*/
+/* RESET & SUCH */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+a, b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	word-wrap: break-word; }
+li {
+	list-style-type: none;
+}
+
+
+/* BEGIN REAL STYLES */
+body {
+	background: url(wood_bg.png) repeat;
+	font-family: Rancho;
+	font-size: 18px;
+	color: #574534;
+	letter-spacing: 1px;
+	min-width: 900px;
+}
+#wrap {
+	width: 900px;
+	overflow: hidden;
+	margin: 20px auto 0;
+}
+a {
+	color: #d96216;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+}
+a:hover {
+	color: #610207;
+}
+
+/* HEADER */
+h1.header {
+	text-indent: -9999px;
+	background: url(logo.png) no-repeat 0px 0;
+	height: 60px;
+	width: 250px;
+	float:left;
+	margin: 0 auto;
+}
+h1.header:hover {
+	background: url(logo_hover.png) no-repeat 0 0;
+}
+.user_links {
+	margin: 0 auto 50px;
+	text-align: right;
+}
+.user_links a {
+	color: #574534;
+	color: rgba(0,0,0,.4);
+	font-size: 24px;
+	text-shadow: 1px 1px 0 rgba(255,255,255,.2);
+	text-decoration: none;
+	margin-right: 20px;
+
+}
+.user_links a:hover {
+	color: rgba(0,0,0,.6);
+}
+
+/* STORY BODY */
+
+#content {
+	float: left;
+	font-size: 25px;
+	clear: both;
+	width: 600px;
+}
+#story_title {
+	background: url(brown_header.png) no-repeat top;
+	width: 600px;
+	height: 65px;
+	margin: 0px  0;
+	text-align: center;
+	font-size: 30px;
+	color: #f4f4f6;
+	text-shadow: 1px 1px 0 #222;
+	padding-top: 5px;
+}
+#story {
+	width: 560px;
+	padding: 20px;
+	background: #fff;
+	overflow: hidden;
+}
+.bottom_pad {
+	background: url(bottom_pad.png) no-repeat;
+	width: 600px;
+	margin: 0 0;
+	height: 20px;
+}
+
+/* STORY LINES/SUBMISSIONS */
+.lines li {
+	text-align: center;
+}
+.submissions {
+	overflow: hidden;
+	margin-top: 15px;
+}
+.submissions li {
+	margin: 10px 0 10px 30px;
+	border-bottom: 1px dotted #eaeaea;
+	padding-bottom: 10px;
+	overflow: hidden;
+}
+.submissions p {
+	width: 400px;
+	float: left;
+}
+.submissions span {
+	float: right;
+	padding: 10px;
+	background: #eaeaea;
+	border-radius: 10px;
+	text-shadow: 1px 1px 0 #888;
+	box-shadow: 0 0 1px rgba(0,0,0,.5);
+	color: #F25C05;
+}
+/* FORM FOR SUBMISSIONS */
+#new_submission {
+	background: #eaeaea;
+	margin: 20px auto;
+	border-radius: 10px;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #ccc;
+	box-shadow: 0px 1px 5px rgba(0,0,0,.1);
+}
+#new_submission #new_line_content {
+	background: #fff;
+	padding: 5px;
+	width: 400px;
+	color: #444;
+	margin: 0 auto 0px;
+	border: none;
+	box-shadow: 0 0 5px rgba(0,0,0,.1);
+	text-shadow: none;
+}
+
+#new_submission label {
+	font-size: 16px;
+}
+#new_submission input {
+	background: #82941e;
+	font: 20px Rancho;
+	border: 1px solid #eaeaea;
+	border-radius: 5px;
+	padding: 5px;
+	color: #fff;
+	text-shadow: 1px 1px 0 #222;
+	cursor: pointer;
+}
+#new_submission input:hover {
+	background: #3E5916;
+}
+#new_submission input#submission_content {
+	background: #fff;
+	width: 400px;
+	color: #222;
+	text-shadow: none;
+	border: 1px solid #ccc;
+}
+
+/* VOTE BUTTON */
+.submissions #vote {
+	float: right;
+	margin-left: 20px;
+}
+#vote input,
+input.submit {
+	background: #F28705;
+	border: 1px solid #F25C05;
+	text-shadow: 1px 1px 0 #888;
+	box-shadow: 0 0 1px rgba(0,0,0,.5);
+	font: 20px Rancho;
+	color: #fff;
+	border-radius: 5px;
+	padding: 0px 15px;
+}
+#vote input:hover,
+input.submit:hover {
+	background: #F25C05;
+	border: 1px solid #F28705;
+	cursor: pointer;
+}
+.votes {
+	float: right;
+	font-size: 25px;
+	color: #F25C05;
+	text-shadow: 1px 1px 0 #ccc;
+	margin-bottom: 10px;
+}
+.votes span {
+	color: #3E5916;
+	margin-left: 10px;
+}
+
+/* SIDEBAR */
+#sidebar {
+	width: 260px;
+	float: right;
+	color: #574534;
+	color: rgba(0,0,0,.4);
+	text-align: center;
+	text-shadow: 1px 1px 0 rgba(255,255,255,.2);
+	border: 3px double rgba(0,0,0,.2);
+	padding: 10px;
+	border-radius: 10px;
+}
+#sidebar p {
+	font-size: 32px;
+}
+#sidebar a,
+.back {
+	color: #574534;
+	color: rgba(0,0,0,.4);
+	font-size: 24px;
+	text-shadow: 1px 1px 0 rgba(255,255,255,.2);
+	text-decoration: none;
+}
+#sidebar a:hover,
+.back:hover {
+	color: rgba(0,0,0,.6);
+}
+#sidebar h2 {
+	font-size: 35px;
+}
+.story_users {
+	font-size: 20px;
+}
+#invite_form {
+	font-size: 25px;
+	margin: 10px 0;
+}

@@ -1,32 +1,56 @@
-<h1><%= @story.title %></h1>
-<ul>
-<% @story_lines.each do |line| %>
-<li><%= line.content %></li>
-<% end %>
-</ul>
+<% if @user && Invite.find_by_user_id_and_story_id(@user.id, params[:id]) %>
+<div id="content">
+  <h1 id="story_title"><%= @story.title %></h1>
+  <div id="story">
 
-<%= form_for @new_submission do |f| %>
-<%= f.text_field :content %>
-<%= f.submit "Create Line" %>
+    <ul class="lines">
+      <% @story_lines.each do |line| %>
+      <li><%= line.content %></li>
+      <% end %>
+    </ul>
+
+    <%= form_for @new_submission do |f| %>
+    <%= f.text_field :content %>
+    <%= f.submit "Create Line" %>
+    <% end %>
+
+    <ul class="submissions">
+      <% @story_submissions.each do |submission| %>
+      <li><p>
+      	<%= submission.content %>
+      	</p>
+      	<span>
+      	<%= form_tag "/stories/#{params[:id]}/submission", :method => "put", :id => "vote" do %>
+      		<%= hidden_field_tag "vote_count", 1 %>
+      		<%= hidden_field_tag "submission_id", submission.id %>
+      		<%= submit_tag "Vote" %>
+      	<% end %>
+      	<%= submission.votes %>
+      	</span>	
+      </li>
+      <% end %>
+    </ul>
+
+    
+  </div><!-- #story -->
+  <div class="bottom_pad"></div>
+</div><!-- #content -->  
+<div id="sidebar">
+  <h2>This Story's Users</h2>
+  <ul class="story_users">
+    <% @story_invites.each do |invite| %>
+    <li><%= invite.user.name %></li>
+    <% end %>
+  </ul>
+  <%= form_tag "/stories/#{params[:id]}", method: "put", id: "invite_form" do %>
+  <%= label_tag :q, "Enter user's name to add a collaborator to this story" %>
+  <%= text_field_tag :q %>
+  <%= submit_tag "Submit" %>
+  <% end %>
+  <%= link_to "All Stories", root_url %>
+</div><!-- #sidebar -->
+    
+<% else %>
+<h2>YOU SHALL NOT PASSSS (Seriously, you aren't allowed to view this story.)</h2>
 <% end %>
 
-<ul>
-<% @story_submissions.each do |submission| %>
-<li><p>
-	<%= submission.content %>
-	</p>
-	<span>
-	<%= form_tag "/stories/#{params[:id]}/submission", :method => "put", :id => "vote" do %>
-		<%= hidden_field_tag "vote_count", 1 %>
-		<%= hidden_field_tag "submission_id", submission.id %>
-		<!-- I don't think the line below is doing anything... -->
-		<%= hidden_field_tag "user_id", :user_id %>
-		<%= submit_tag "Vote" %>
-	<% end %>
-	<%= submission.votes %>
-	</span>	
-</li>
-<% end %>
-</ul>
-
-<%= link_to "All Stories", stories_url %>

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   def find_user
     @user = User.find_by_id(session[:login_id])
-    @user_id = @user.id
+    return @user
   end
   
   def require_login
@@ -13,4 +13,6 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, notice: "You must be logged in!"
     end
   end
+  
+  
 end

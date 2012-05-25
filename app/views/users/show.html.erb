@@ -1,4 +1,11 @@
 <%= @user.name %>
 <% @user.lines.each do |line| %>
 	<%= line.content %>
-	<% end %>
+<% end %>
+
+<h2>Stories you are collaborating on</h2>
+<ul>
+  <% @user.stories.each do |story| %>
+  <li><%= link_to story.title, "/stories/#{story.id}" %></li>
+  <% end %>
+</ul>
