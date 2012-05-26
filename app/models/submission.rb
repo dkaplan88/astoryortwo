@@ -2,6 +2,7 @@ class Submission < ActiveRecord::Base
   attr_accessible :story_id, :user_id, :votes
   belongs_to :story
   belongs_to :user
+  belongs_to :public_story
   scope :by_votes, order: "votes DESC"  
 
 

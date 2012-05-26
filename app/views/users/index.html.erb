@@ -1,0 +1,11 @@
+<div id="content">
+   <h1 id="story_title">Just Look at all these Story Tellers!</h1>
+	 <div id="story">
+	 <ul>
+		<% @users.each do |user| %>
+		<li><%= link_to user.name, "/users/#{user.id}" %></li>
+		<% end %>
+	 </ul>  
+     </div><!-- story -->
+     <div class="bottom_pad"></div>
+</div><!-- content -->

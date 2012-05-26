@@ -50,6 +50,13 @@ a:hover {
 h3 {
 	color: #82941E ;
 }
+.wood_text {
+	color: #574534;
+	color: rgba(0,0,0,.4);
+	font-size: 20px;
+	margin-right: 20px;
+	text-shadow: 1px 1px 0 rgba(255,255,255,.2);
+}
 /* HEADER */
 h1.header {
 	text-indent: -9999px;

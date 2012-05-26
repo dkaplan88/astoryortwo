@@ -1,13 +1,29 @@
 <div id="content">
-	 <h1 id="story_title">All of our Stories</h1>
-	 <div id="story">
+	<h1 id="story_title">Welcome!</h1>
+	<div id="story">
 	    <p class="error"><%= flash[:notice] %></p>
+		<% if @user %>
+			<% if Invite.find_by_user_id(@user.id) %>
+				<h3>Hello <%= @user.name %>, you belong to these stories:</h3>
+			<% end %>
+		<% end %>
 		<ul>
 		<% @stories.each do |story| %>
+			<% if @user %>
+				<% if story.private_story == true && story.invites.find_by_story_id_and_user_id(story.id, @user.id) %>
+					<li><%= link_to story.title, story %> (Private)</li>
+				<% end %>
+			<% end %>
+		<% end %>
+		</ul>
+		<h3>Check Out Our Community Stories:</h3>
+		<ul>
+		<% @stories.each do |story| %>
+			<% if story.private_story == false %>
 			<li><%= link_to story.title, story %></li>
+			<% end %>
 		<% end %>
 		</ul>
 	</div><!-- #story -->
 	<div class="bottom_pad"></div>
 </div><!-- content -->
-

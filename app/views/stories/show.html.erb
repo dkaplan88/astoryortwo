@@ -1,4 +1,4 @@
-<% if @user && Invite.find_by_user_id_and_story_id(@user.id, params[:id]) %>
+<% if @user && Invite.find_by_user_id_and_story_id(@user.id, params[:id]) && Story.find(params[:id]).private_story == true || Story.find(params[:id]).private_story == false %>
 
 
 <div id="content">
@@ -37,6 +37,8 @@
   <div class="bottom_pad"></div>
 </div><!-- #content -->  
 <div id="sidebar">
+<% if Story.find(params[:id]).private_story == false %>
+<% else %>
   <h2>This Story's Users</h2>
   <ul class="story_users">
     <% @story_invites.each do |invite| %>
@@ -49,6 +51,7 @@
   <%= submit_tag "Submit" %>
   <% end %>
   <p class="error"><%= flash[:notice] %></p>
+<% end %>
   <%= link_to "All Stories", root_url %>
 </div><!-- #sidebar -->
 
