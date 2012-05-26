@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   
   def show
   end
+  def new
+    @user = User.new
+  end
   
   def update
     if User.find_by_name(params[:q]) && !Invite.find_by_user_id_and_story_id(@user.id, params[:id])
@@ -14,6 +17,20 @@ class UsersController < ApplicationController
     else Invite.find_by_user_id_and_story_id(@user.id, params[:id])
       flash[:notice] = "I think that user is already collaborating on this story"
       redirect_to story_url      
+    end
+  end
+  
+  def create
+    @user = User.new(params[:user])
+    
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to root_url, notice: 'User was successfully created.' }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

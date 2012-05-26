@@ -1,16 +1,19 @@
-<h1>Login Here</h1>
+<div id="content">
+	 <h1 id="story_title">Login</h1>
+	 <div id="story">
+		<%= form_tag logins_url do  %>
 
-
-<%= form_tag logins_url do  %>
-
-<p>  
-  <%= label_tag :login %>
-  <%= text_field_tag :login %>
-</p>  
-<p>  
-  <%= label_tag :password, "Password" %>
-  <%= password_field_tag :password %>
-</p>  
-  <%= submit_tag "Let's Go!" %>
+		<p>  
+		  <%= label_tag :login %>
+		  <%= text_field_tag :login %>
+		</p>  
+		<p>  
+		  <%= label_tag :password, "Password" %>
+		  <%= password_field_tag :password %>
+		</p>  
+		  <%= submit_tag "Let's Go!" %>
   
-<% end %>
+		<% end %>
+	</div>
+	<div class="bottom_pad"></div>
+</div><!-- content -->

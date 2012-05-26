@@ -1,6 +1,7 @@
 <div id="content">
 	 <h1 id="story_title">All of our Stories</h1>
 	 <div id="story">
+	    <p class="error"><%= flash[:notice] %></p>
 		<ul>
 		<% @stories.each do |story| %>
 			<li><%= link_to story.title, story %></li>
