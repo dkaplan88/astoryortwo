@@ -13,7 +13,7 @@ class LoginsController < ApplicationController
   def create
     logger.debug "Helllllooooooooooo!"
     
-    user = User.find_by_login(params['login'])
+    user = User.find_by_name(params['name'])
     if user
       if user.authenticate(params[:password])
         flash[:notice] = "Hello, #{user.name}!"
