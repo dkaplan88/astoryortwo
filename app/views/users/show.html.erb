@@ -1,11 +1,23 @@
-<%= @user.name %>
-<% @user.lines.each do |line| %>
-	<%= line.content %>
-<% end %>
-
-<h2>Stories you are collaborating on</h2>
-<ul>
-  <% @user.stories.each do |story| %>
-  <li><%= link_to story.title, "/stories/#{story.id}" %></li>
-  <% end %>
-</ul>
+<div id="content">
+   <h1 id="story_title">Welcome <%= @user.name %>!</h1>
+	 <div id="story">
+	   <h3>Stories <%= @user.name %> Belongs To:</h3>
+	   <div class="user_info">
+       <ul>
+         <% @user.stories.each do |story| %>
+         <li><%= link_to story.title, "/stories/#{story.id}" %></li>
+         <% end %>
+       </ul>
+     </div><!-- .user_info -->
+     
+     <h3><%= @user.name %>'s Contributions</h3>
+     <div class="user_info">  
+       <ul class="submitted_lines">
+        <% @user.lines.each do |line| %>
+        	<li><%= link_to line.content, "/stories/#{line.story_id}" %></li>
+        <% end %>
+        </ul>
+      </div><!-- .user_info -->
+  </div><!-- story -->
+  <div class="bottom_pad"></div>
+</div><!-- content -->

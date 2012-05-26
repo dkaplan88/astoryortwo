@@ -40,7 +40,7 @@
   <h2>This Story's Users</h2>
   <ul class="story_users">
     <% @story_invites.each do |invite| %>
-    <li><%= invite.user.name %></li>
+    <li><%= link_to invite.user.name, "/users/#{invite.user.id}" %></li>
     <% end %>
   </ul>
   <%= form_tag "/stories/#{params[:id]}", method: "put", id: "invite_form" do %>
@@ -48,6 +48,7 @@
   <%= text_field_tag :q %>
   <%= submit_tag "Submit" %>
   <% end %>
+  <p class="error"><%= flash[:notice] %></p>
   <%= link_to "All Stories", root_url %>
 </div><!-- #sidebar -->
 

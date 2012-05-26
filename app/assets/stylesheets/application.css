@@ -47,7 +47,9 @@ a {
 a:hover {
 	color: #610207;
 }
-
+h3 {
+	color: #82941E ;
+}
 /* HEADER */
 h1.header {
 	text-indent: -9999px;
@@ -187,7 +189,9 @@ h1.header:hover {
 	margin-left: 20px;
 }
 #vote input,
-input.submit {
+input.submit,
+#invite_form input,
+#invite_form input.submit {
 	background: #F28705;
 	border: 1px solid #F25C05;
 	text-shadow: 1px 1px 0 #888;
@@ -196,6 +200,16 @@ input.submit {
 	color: #fff;
 	border-radius: 5px;
 	padding: 0px 15px;
+}
+#invite_form input {
+	float: left;
+}
+#invite_form #q {
+	background: none;
+	border: 3px double #888;
+	color: #574534;
+	color: rgba(0,0,0,.4);
+	text-shadow: 1px 1px 0 rgba(255,255,255,.2);
 }
 #vote input:hover,
 input.submit:hover {
@@ -249,6 +263,15 @@ input.submit:hover {
 	font-size: 20px;
 }
 #invite_form {
+	overflow: hidden;
 	font-size: 25px;
 	margin: 10px 0;
+}
+
+/* PROFILE PAGES */
+.user_info {
+	border: 3px double #ccc;
+	padding: 15px;
+	border-radius: 10px;
+	margin-bottom: 10px;
 }
