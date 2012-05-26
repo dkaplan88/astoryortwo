@@ -61,7 +61,10 @@ class StoriesController < ApplicationController
       #FLASH NOTICE
       redirect_to story_url
     else
-      submit_vote
+      submission = Submission.find_by_id(params[:submission_id])
+      submission.votes += params[:vote_count].to_i
+      submission.save
+      redirect_to story_url
     end
   end
 end
