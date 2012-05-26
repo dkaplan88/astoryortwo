@@ -244,9 +244,21 @@ input.submit:hover {
 	color: rgba(0,0,0,.4);
 	text-align: center;
 	text-shadow: 1px 1px 0 rgba(255,255,255,.2);
+/*	border: 3px double rgba(0,0,0,.2);*/
+/*	padding: 10px;*/
+/*	border-radius: 10px;*/
+}
+.sidebar_widget {
+	width: 260px;
+	float: right;
+	color: #574534;
+	color: rgba(0,0,0,.4);
+	text-align: center;
+	text-shadow: 1px 1px 0 rgba(255,255,255,.2);
 	border: 3px double rgba(0,0,0,.2);
 	padding: 10px;
 	border-radius: 10px;
+	margin-bottom: 20px;
 }
 #sidebar p {
 	font-size: 32px;
@@ -273,6 +285,9 @@ input.submit:hover {
 	overflow: hidden;
 	font-size: 25px;
 	margin: 10px 0;
+}
+ul.homepage_sidebar {
+	font-size: 20px;
 }
 
 /* PROFILE PAGES */
