@@ -64,7 +64,7 @@ class StoriesController < ApplicationController
     elsif Submission.find_all_by_story_id(params[:id]).empty? || Submission.find_by_id(params[:submission_id]).nil?
       #FLASH NOTICE
       redirect_to story_url
-    elsif Like.find_by_submission_id(params[:submission_id]) && Like.find_by_user_id(@user.id)
+    elsif Like.find_by_submission_id_and_user_id(params[:submission_id], @user.id)
         flash[:notice] = "Only 1 vote per submission please"
         redirect_to story_url
     else
