@@ -7,6 +7,7 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @stories = Story.all
     @users = User.all
     @invite = Invite.new
     @story = Story.find(params[:id])

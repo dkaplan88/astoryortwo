@@ -37,25 +37,34 @@
   <div class="bottom_pad"></div>
 </div><!-- #content -->  
 <div id="sidebar">
-	<div class="sidebar_widget">
+	
 	<% if Story.find(params[:id]).private_story == false %>
 	<% else %>
+	<div class="sidebar_widget">
 	  <h2>This Story's Users</h2>
 	  <ul class="story_users">
 	    <% @story_invites.each do |invite| %>
 	    <li><%= link_to invite.user.name, "/users/#{invite.user.id}" %></li>
 	    <% end %>
 	  </ul>
+	</div><!-- sidebar_widget -->
+	<div class="sidebar_widget">
 		<%= form_for @invite do |f| %>
-		<%= f.label :user_id, "invite a user" %>
+		<%= f.label :user_id, "Invite a friend" %>
 		<%= f.collection_select :user_id, User.all, :id, :name %>
 		<%= f.hidden_field :story_id, value: @story.id %>
-		<%= f.submit %>
+		<%= f.submit "!"%>
 		<% end %>
-	
 	  <p class="error"><%= flash[:user_notice] %></p>
+	</div><!-- sidebar_widget -->
 	<% end %>
-	  <%= link_to "All Stories", root_url %>
+	<div class="sidebar_widget">
+		<h2>Open Stories</h2>
+	  	<% @stories.each do |story| %>
+		<% if story.private_story == false && story.lines.count < 10 %>
+		<%= link_to story.title %>
+		<% end %>
+		<% end %>
 	</div><!-- sidebar_widget -->
 </div><!-- #sidebar -->
 

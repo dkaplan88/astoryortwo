@@ -217,7 +217,9 @@ h1.header:hover {
 #vote input,
 input.submit,
 #invite_form input,
-#invite_form input.submit {
+#invite_form input.submit,
+#invite_user_id,
+input {
 	background: #F28705;
 	border: 1px solid #F25C05;
 	text-shadow: 1px 1px 0 #888;
@@ -306,6 +308,9 @@ input.submit:hover {
 	margin: 10px 0;
 }
 ul.homepage_sidebar {
+	font-size: 20px;
+}
+#new_invite {
 	font-size: 20px;
 }
 
