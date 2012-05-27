@@ -14,7 +14,6 @@ class StoriesController < ApplicationController
     @new_submission = Submission.new
     @story_submissions = Submission.by_votes.find_all_by_story_id(params[:id])
     @story_invites = @story.invites
-
   end
   
   def create
@@ -24,10 +23,10 @@ class StoriesController < ApplicationController
     submission.user_id = @user.id
     submission.votes = 0
     if submission.save
-      flash[:save_notice] = "Thanks homie!"
+      flash[:notice] = "Real clever..."
       redirect_to story_url
     else
-      flash[:alert] = "Pew pew try again"
+      flash[:notice] = "Nice! Now try writing something this time..."
       redirect_to story_url
     end
   end
