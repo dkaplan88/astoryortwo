@@ -6,7 +6,8 @@ class StoriesController < ApplicationController
     @stories = Story.all
   end
   
-  def show    
+  def show
+    @invite = Invite.new
     @story = Story.find(params[:id])
     @story_lines = @story.lines
     @new_submission = Submission.new

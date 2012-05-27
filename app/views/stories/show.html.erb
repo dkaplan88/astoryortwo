@@ -45,12 +45,14 @@
 	    <% @story_invites.each do |invite| %>
 	    <li><%= link_to invite.user.name, "/users/#{invite.user.id}" %></li>
 	    <% end %>
-	  </ul>>
-	  <%= form_tag "/stories/#{params[:id]}", method: "put", id: "invite_form" do %>
-	  <%= label_tag :q, "Enter user's name to add a collaborator to this story" %>
-	  <%= text_field_tag :q %>
-	  <%= submit_tag "Submit" %>
-	  <% end %>
+	  </ul>
+		<%= form_for @invite do |f| %>
+		<%= f.label :user_id, "invite a user" %>
+		<%= f.collection_select :user_id, User.all, :id, :name %>
+		<%= f.hidden_field :story_id, value: @story.id %>
+		<%= f.submit %>
+		<% end %>
+	
 	  <p class="error"><%= flash[:notice] %></p>
 	<% end %>
 	  <%= link_to "All Stories", root_url %>

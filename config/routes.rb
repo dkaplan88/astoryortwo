@@ -7,7 +7,8 @@ Astoryortwo::Application.routes.draw do
   delete "logout" => 'logins#destroy', :as => :logout
   get "logins/new", :as => :new_login
   post "logins/create", :as => :logins
-
+  
+  post "invites/new" => "invites#create", as: :invites
   
 
   put "stories/:id", controller: "users", action: :update

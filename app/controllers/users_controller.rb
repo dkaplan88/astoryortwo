@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-#TO DO: AUTOCOMPLETE SUBMIT FORM, FIGURE OUT HOW TO DOWNCASE NAMES...?
+
   def index
     @users = User.all
   end
