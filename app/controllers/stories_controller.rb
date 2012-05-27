@@ -43,13 +43,15 @@ class StoriesController < ApplicationController
     vote_total += submission.votes
     end
     
-    if session[:vote_time] && (Time.now - session[:vote_time] < 1800)
-          flash[:notice] = "Only 1 Vote Per 30-Minutes...Please!" 
-          redirect_to story_url and return story_url
-        else
-          #@submission = Submission.find_by_id(params[:id])
-          session[:vote_time] = Time.now
-        end
+    # if session[:vote_time] && (Time.now - session[:vote_time] < 1800)
+    if session[:submission_id] == Submission.find_by_id(params[:submission_id])
+      flash[:notice] = "Only 1 Vote Per Submission...Please!" 
+      redirect_to story_url and return story_url
+    else
+    #@submission = Submission.find_by_id(params[:id])
+      # session[:vote_time] = Time.now
+      session[:submission_id] = Submission.find_by_id(params[:submission_id])
+    end
     
     if vote_total == 9 && Line.find_all_by_story_id(params[:id]).count == 9
       submission_to_line_create_new_story
@@ -61,10 +63,7 @@ class StoriesController < ApplicationController
       #FLASH NOTICE
       redirect_to story_url
     else
-      submission = Submission.find_by_id(params[:submission_id])
-      submission.votes += params[:vote_count].to_i
-      submission.save
-      redirect_to story_url
+      submit_vote
     end
   end
 end

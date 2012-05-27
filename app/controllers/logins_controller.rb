@@ -16,7 +16,6 @@ class LoginsController < ApplicationController
     user = User.find_by_name(params['name'])
     if user
       if user.authenticate(params[:password])
-        flash[:notice] = "Hello, #{user.name}!"
         session[:login_id] = user.id
         redirect_to root_url
       else

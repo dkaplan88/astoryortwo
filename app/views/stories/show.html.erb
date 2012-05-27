@@ -15,7 +15,7 @@
     <%= f.text_field :content %>
     <%= f.submit "Create Line" %>
     <% end %>
-
+	<p class="error"><%= flash[:notice] %></p>
     <ul class="submissions">
       <% @story_submissions.each do |submission| %>
       <li><p>
@@ -45,7 +45,7 @@
 	    <% @story_invites.each do |invite| %>
 	    <li><%= link_to invite.user.name, "/users/#{invite.user.id}" %></li>
 	    <% end %>
-	  </ul>
+	  </ul>>
 	  <%= form_tag "/stories/#{params[:id]}", method: "put", id: "invite_form" do %>
 	  <%= label_tag :q, "Enter user's name to add a collaborator to this story" %>
 	  <%= text_field_tag :q %>
