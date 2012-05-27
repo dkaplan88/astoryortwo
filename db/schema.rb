@@ -11,13 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120526190236) do
+ActiveRecord::Schema.define(:version => 20120527213149) do
 
   create_table "invites", :force => true do |t|
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "submission_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "lines", :force => true do |t|
@@ -65,6 +72,13 @@ ActiveRecord::Schema.define(:version => 20120526190236) do
     t.datetime "updated_at",            :null => false
     t.string   "password_digest"
     t.string   "email"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "submission_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

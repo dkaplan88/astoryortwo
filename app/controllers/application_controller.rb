@@ -13,34 +13,35 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, notice: "You must be logged in!"
     end
   end
-  def create_submission
-    submission = Submission.new
-    submission.content = params[:submission][:content]
-    submission.story_id = params[:id]
-    submission.user_id = @user.id
-    submission.votes = 0
-    if submission.save
-      flash[:save_notice] = "Thanks homie!"
-      redirect_to story_url
-    else
-      flash[:alert] = "Pew pew try again"
-      redirect_to story_url
-    end
-  end
+  # def create_submission
+  #   submission = Submission.new
+  #   submission.content = params[:submission][:content]
+  #   submission.story_id = params[:id]
+  #   submission.user_id = @user.id
+  #   submission.votes = 0
+  #   if submission.save
+  #     flash[:save_notice] = "Thanks homie!"
+  #     redirect_to story_url
+  #   else
+  #     flash[:alert] = "Pew pew try again"
+  #     redirect_to story_url
+  #   end
+  # end
 
   # To display count-down of votes
-  def votes_left
-    vote_total = 10
-    # @submissions = Submission.find_all_by_story_id(params[:id])
-    @submissions.each do |submission|
-    vote_total -= submission.votes
-    end
-    vote_total
-  end
+  # def votes_left
+  #   vote_total = 10
+  #   # @submissions = Submission.find_all_by_story_id(params[:id])
+  #   @submissions.each do |submission|
+  #   vote_total -= submission.votes
+  #   end
+  #   vote_total
+  # end
 
   def submit_vote
     submission = Submission.find_by_id(params[:submission_id])
-    submission.votes += params[:vote_count].to_i
+    Like.create user_id: @user.id, submission_id: submission.id
+    submission.votes = submission.likes.count
     submission.save
     redirect_to story_url
   end

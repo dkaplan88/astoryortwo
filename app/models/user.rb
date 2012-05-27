@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
   has_many :lines
   has_many :invites
   has_many :stories, :through => :invites
+  has_many :likes
   has_secure_password
 end

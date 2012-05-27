@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
     submission.user_id = @user.id
     submission.votes = 0
     if submission.save
-      flash[:notice] = "Real clever..."
+      flash[:notice] = "Thanks for submitting"
       redirect_to story_url
     else
       flash[:notice] = "Nice! Now try writing something this time..."
@@ -44,16 +44,16 @@ class StoriesController < ApplicationController
     submissions.each do |submission|
     vote_total += submission.votes
     end
-    
+
     # if session[:vote_time] && (Time.now - session[:vote_time] < 1800)
-    if session[:submission_id] == Submission.find_by_id(params[:submission_id])
-      flash[:notice] = "Only 1 Vote Per Submission...Please!" 
-      redirect_to story_url and return story_url
-    else
-    #@submission = Submission.find_by_id(params[:id])
-      # session[:vote_time] = Time.now
-      session[:submission_id] = Submission.find_by_id(params[:submission_id])
-    end
+    # if session[:submission_id] == Submission.find_by_id(params[:submission_id])
+    #       flash[:notice] = "Only 1 Vote Per Submission...Please!" 
+    #       redirect_to story_url and return story_url
+    #     else
+    #     #@submission = Submission.find_by_id(params[:id])
+    #       # session[:vote_time] = Time.now
+    #       session[:submission_id] = Submission.find_by_id(params[:submission_id])
+    #     end
     
     if vote_total == 9 && Line.find_all_by_story_id(params[:id]).count == 9
       submission_to_line_create_new_story
@@ -64,6 +64,9 @@ class StoriesController < ApplicationController
     elsif Submission.find_all_by_story_id(params[:id]).empty? || Submission.find_by_id(params[:submission_id]).nil?
       #FLASH NOTICE
       redirect_to story_url
+    elsif Like.find_by_submission_id(params[:submission_id]) && Like.find_by_user_id(@user.id)
+        flash[:notice] = "Only 1 vote per submission please"
+        redirect_to story_url
     else
       submit_vote
     end

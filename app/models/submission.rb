@@ -3,6 +3,7 @@ class Submission < ActiveRecord::Base
   belongs_to :story
   belongs_to :user
   belongs_to :public_story
+  has_many :likes
   scope :by_votes, order: "votes DESC"
   validates_presence_of :content
 
