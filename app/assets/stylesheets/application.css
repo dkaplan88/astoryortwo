@@ -69,6 +69,11 @@ h3 {
 	float: right;
 	width: 49%;
 }
+.notice,
+.error {
+	color: #610207;
+	text-align: center;
+}
 /* HEADER */
 h1.header {
 	text-indent: -9999px;

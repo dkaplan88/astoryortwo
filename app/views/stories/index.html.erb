@@ -5,26 +5,27 @@
 		
 		<% if @user %>
 			<div class="left_list">
-				<% if Invite.find_by_user_id(@user.id) %>
-					<h3>Private Stories:</h3>
-				<% end %>
-				<ul>
-				<% @stories.each do |story| %>
-					<% if @user %>
-						<% if story.private_story == true && story.invites.find_by_story_id_and_user_id(story.id, @user.id) %>
-							<li><%= link_to story.title, story %></li>
-						<% end %>
-					<% end %>
-				<% end %>
-				</ul>
-			</div><!-- left_list -->
-			<div class="right_list">	
 				<h3>Public Stories:</h3>
 				<ul>
 				<% @stories.each do |story| %>
 					<% if story.private_story == false %>
 					<li><%= link_to story.title, story %></li>
 					<% end %>
+				<% end %>
+				</ul>
+			</div><!-- left_list -->
+			<div class="right_list">
+				<% if Invite.find_by_user_id(@user.id) %>
+					<h3>Private Stories:</h3>
+				<% end %>
+				<ul>
+				<% @stories.each do |story| %>
+						<% if story.private_story == true && story.invites.find_by_story_id_and_user_id(story.id, @user.id) %>
+							<li><%= link_to story.title, story %></li>
+						<% end %>
+				<% end %>
+				<% if !Invite.find_by_user_id(@user.id) %>
+				<h3>You don't belong to any private stories</h3>
 				<% end %>
 				</ul>
 			</div><!-- right_list -->	
