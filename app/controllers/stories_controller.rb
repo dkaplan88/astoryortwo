@@ -7,12 +7,14 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @users = User.all
     @invite = Invite.new
     @story = Story.find(params[:id])
     @story_lines = @story.lines
     @new_submission = Submission.new
     @story_submissions = Submission.by_votes.find_all_by_story_id(params[:id])
     @story_invites = @story.invites
+
   end
   
   def create
