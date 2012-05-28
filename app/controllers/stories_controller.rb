@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
 
-  before_filter :require_login, :only => [:create]
+  before_filter :require_login, :only => [:create_story, :create_submission]
   
   def index
     @stories = Story.all

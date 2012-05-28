@@ -302,6 +302,10 @@ input.submit:hover {
 }
 #sidebar h2 {
 	font-size: 35px;
+	border-bottom: 3px double #888;
+
+	width: 75%;
+	margin: 0 auto 10px;
 }
 .story_users {
 	font-size: 20px;
@@ -311,8 +315,9 @@ input.submit:hover {
 	font-size: 25px;
 	margin: 10px 0;
 }
-ul.homepage_sidebar {
+ul.homepage_sidebar li {
 	font-size: 20px;
+	margin-bottom: 15px;
 }
 #new_invite {
 	font-size: 20px;
