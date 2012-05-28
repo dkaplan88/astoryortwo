@@ -13,7 +13,7 @@
   <a href="/"><h1 class="header">A Story or Two</h1></a>
     <div class="user_links">
     <% if session[:login_id].present? %>
-      <p class="wood_text">Hello <%= @user.name %>!</p>
+      <p class="wood_text">Hello <%= @user.name.capitalize %>!</p>
 		<%= link_to "My Profile", "/users/#{@user.id}" %>
       <%= link_to "Log Out", logout_url, :method => "delete" %>
     <% else %>

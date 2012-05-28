@@ -13,7 +13,7 @@ class LoginsController < ApplicationController
   def create
     logger.debug "Helllllooooooooooo!"
     
-    user = User.find_by_name(params['name'])
+    user = User.find_by_name(params[:name].downcase)
     if user
       if user.authenticate(params[:password])
         session[:login_id] = user.id

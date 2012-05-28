@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.name = params[:user][:name].downcase
     
     respond_to do |format|
       if @user.save

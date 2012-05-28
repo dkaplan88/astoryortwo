@@ -1,5 +1,5 @@
 <div id="content">
-	<h1 id="story_title"><% if @user %>Welcome, <%= @user.name %><% else %>Welcome!<% end %></h1>
+	<h1 id="story_title"><% if @user %>Welcome, <%= @user.name.capitalize %><% else %>Welcome!<% end %></h1>
 	<div id="story">
 	    <p class="error"><%= flash[:notice] %></p>
 		
