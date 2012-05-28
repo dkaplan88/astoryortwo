@@ -37,6 +37,14 @@ body {
 	letter-spacing: 1px;
 	min-width: 900px;
 }
+.hey {
+	font-size: 50px;
+	text-align: center;
+	padding: 5px;
+	border-radius: 10px;
+	border: 3px double #888;
+	margin-bottom: 20px;
+}
 #wrap {
 	width: 900px;
 	overflow: hidden;
@@ -220,7 +228,8 @@ input.submit,
 #invite_form input,
 #invite_form input.submit,
 #invite_user_id,
-.new_invite input {
+.new_invite input,
+input[type="submit"] {
 	background: #F28705;
 	border: 1px solid #F25C05;
 	text-shadow: 1px 1px 0 #888;

@@ -1,7 +1,7 @@
 <div id="content">
-   <h1 id="story_title">Welcome <%= @user.name %>!</h1>
+   <h1 id="story_title">Welcome <%= @user.name.capitalize %>!</h1>
 	 <div id="story">
-	   <h3>Stories <%= @user.name %> Belongs To:</h3>
+	   <h3>Stories <%= @user.name.capitalize %> Belongs To:</h3>
 	   <div class="user_info">
        <ul>
          <% @user.stories.each do |story| %>
@@ -10,7 +10,7 @@
        </ul>
      </div><!-- .user_info -->
      
-     <h3><%= @user.name %>'s Contributions</h3>
+     <h3><%= @user.name.capitalize %>'s Contributions</h3>
      <div class="user_info">  
        <ul class="submitted_lines">
         <% @user.lines.each do |line| %>
