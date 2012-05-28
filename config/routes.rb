@@ -3,7 +3,7 @@ Astoryortwo::Application.routes.draw do
 
   root to: "stories#index", as: :root
   get "user/:id", controller: "users", action: "show", as: :user
-  
+
   delete "logout" => 'logins#destroy', :as => :logout
   get "logins/new", :as => :new_login
   post "logins/create", :as => :logins

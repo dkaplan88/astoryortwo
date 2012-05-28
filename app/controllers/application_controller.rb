@@ -76,4 +76,6 @@ class ApplicationController < ActionController::Base
   #    create_story
   #    redirect_to story_url  
   #  end
+  
+
 end

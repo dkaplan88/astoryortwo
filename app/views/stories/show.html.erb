@@ -44,7 +44,7 @@
 	  <h2>This Story's Users</h2>
 	  <ul class="story_users">
 	    <% @story_invites.each do |invite| %>
-	    <li><%= link_to invite.user.name, "/users/#{invite.user.id}" %></li>
+	    <li><%= link_to invite.user.name.capitalize, "/users/#{invite.user.id}" %></li>
 	    <% end %>
 	  </ul>
 	</div><!-- sidebar_widget -->
@@ -60,11 +60,13 @@
 	<% end %>
 	<div class="sidebar_widget">
 		<h2>Open Stories</h2>
+		<ul>
 	  	<% @stories.each do |story| %>
 		<% if story.private_story == false && story.lines.count < 10 %>
-		<%= link_to story.title %>
+		<li><%= link_to story.title %></li>
 		<% end %>
 		<% end %>
+		</ul>
 	</div><!-- sidebar_widget -->
 </div><!-- #sidebar -->
 
