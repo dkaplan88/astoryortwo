@@ -13,6 +13,20 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, notice: "You must be logged in!"
     end
   end
+  
+  def create_new_story
+    story = Story.new
+    @newstories = NewStory.all
+    @newstories = @newstories.shuffle
+    @newstory = @newstories.first
+    story.title = @newstory.title
+    story.private_story = false
+    story.save
+    line = Line.new
+    line.story_id = story.id
+    line.content = @newstory.content
+    line.save
+  end
   # def create_submission
   #   submission = Submission.new
   #   submission.content = params[:submission][:content]
@@ -38,30 +52,28 @@ class ApplicationController < ActionController::Base
   #   vote_total
   # end
 
-  def submit_vote
-    submission = Submission.find_by_id(params[:submission_id])
-    Like.create user_id: @user.id, submission_id: submission.id
-    submission.votes = submission.likes.count
-    submission.save
-    redirect_to story_url
-  end
-
-  def submission_to_line
-    newlines = Submission.by_votes.find_all_by_story_id(params[:id])
-    newline = newlines.first
-    line = Line.create :content => newline.content, :story_id => params[:id], :user_id => newline.user_id
-    Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
-    redirect_to story_url
-  end
-
-  def submission_to_line_create_new_story
-    newlines = Submission.by_vote.find_all_by_story_id(params[:id])
-    newline = newlines.first
-    line = Line.create :content => newline.content, :story_id => params[:id]
-    Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
-    create_story
-    redirect_to story_url  
-  end
-  
-  
+  # def submit_vote
+  #    submission = Submission.find_by_id(params[:submission_id])
+  #    Like.create user_id: @user.id, submission_id: submission.id
+  #    submission.votes = submission.likes.count
+  #    submission.save
+  #    redirect_to story_url
+  #  end
+  # 
+  #  def submission_to_line
+  #    newlines = Submission.by_votes.find_all_by_story_id(params[:id])
+  #    newline = newlines.first
+  #    line = Line.create :content => newline.content, :story_id => params[:id], :user_id => newline.user_id
+  #    Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
+  #    redirect_to story_url
+  #  end
+  # 
+  #  def submission_to_line_create_new_story
+  #    newlines = Submission.by_vote.find_all_by_story_id(params[:id])
+  #    newline = newlines.first
+  #    line = Line.create :content => newline.content, :story_id => params[:id]
+  #    Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
+  #    create_story
+  #    redirect_to story_url  
+  #  end
 end
