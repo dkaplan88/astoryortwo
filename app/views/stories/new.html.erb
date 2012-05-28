@@ -1,0 +1,33 @@
+<div id="content">
+   <h1 id="story_title">Sign Up!</h1>
+	 <div id="story">
+		<%= form_for(@story) do |f| %>
+		  <% if @story.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+		      <ul>
+		      <% @user.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+
+		  <div class="field">
+		    <%= f.label :title %><br />
+		    <%= f.text_field :title, id: "title_story"%>
+		  </div>
+		  <div class="field">
+			<%= label_tag "First Line Here" %><br />
+		  	<%= text_field :post, :content %>
+		  </div>
+		  <div class="actions">
+		    <%= f.submit 'Generate Story!' %>
+		  </div>
+		<% end %>
+
+
+  </div><!-- story -->
+  <div class="bottom_pad"></div>
+</div><!-- content -->

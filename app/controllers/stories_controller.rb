@@ -17,7 +17,17 @@ class StoriesController < ApplicationController
     @story_invites = @story.invites
   end
   
-  def create
+  def create_story
+    @story = Story.new
+    @story.title = params[:story][:title]
+    @story.private_story = true
+    @story.save
+    Invite.create story_id: @story.id, user_id: @user.id
+    Line.create story_id: @story.id, content: params[:post][:content], user_id: @user.id
+    redirect_to root_url
+  end
+  
+  def create_submission
     submission = Submission.new
     submission.content = params[:submission][:content]
     submission.story_id = params[:id]
@@ -71,5 +81,9 @@ class StoriesController < ApplicationController
     else
       submit_vote
     end
+  end
+  
+  def new
+    @story = Story.new
   end
 end

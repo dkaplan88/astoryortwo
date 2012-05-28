@@ -219,7 +219,7 @@ input.submit,
 #invite_form input,
 #invite_form input.submit,
 #invite_user_id,
-input {
+.new_invite input {
 	background: #F28705;
 	border: 1px solid #F25C05;
 	text-shadow: 1px 1px 0 #888;
@@ -228,6 +228,10 @@ input {
 	color: #fff;
 	border-radius: 5px;
 	padding: 0px 15px;
+}
+.new_invite input:hover {
+	background:#F25C05;
+	cursor: pointer;
 }
 #invite_form input {
 	float: left;
