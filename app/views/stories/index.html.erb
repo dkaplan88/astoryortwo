@@ -1,5 +1,5 @@
 <div id="content">
-	<h1 id="story_title"><% if @user %>Welcome, <%= @user.name.capitalize %><% else %>Welcome!<% end %></h1>
+	<h1 id="story_title"><% if @user %>Welcome, <%= @user.name.capitalize %><% else %>Building Stories One Line at a Time!<% end %></h1>
 	<div id="story">
 	    <p class="error"><%= flash[:notice] %></p>
 		
@@ -30,7 +30,7 @@
 				</ul>
 			</div><!-- right_list -->	
 		<% else %>
-		<p class="hey">Hey! <%= link_to "Sign Up Here", new_user_url %>, or <%= link_to "Log In", new_login_url %> and to start writing some stories.</p>
+		<p class="hey">Hey! <%= link_to "Sign Up Here", new_user_url %>, or <%= link_to "Log In", new_login_url %> to start writing stories.</p>
 		<h3>Public Stories Open for Contributions:</h3>
 		<ul>
 		<% @stories.each do |story| %>
