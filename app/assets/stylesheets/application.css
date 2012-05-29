@@ -54,6 +54,9 @@ a {
 	color: #d96216;
 	text-decoration: none;
 	text-shadow: 1px 1px 0 rgba(0,0,0,.1);
+	-webkit-transition: color .5s ease;
+	-moz-transition: color .5s ease;
+	-o-transition: color .5s ease;
 }
 a:hover {
 	color: #610207;
@@ -93,9 +96,13 @@ h1.header {
 	width: 250px;
 	float:left;
 	margin: 0 auto;
+	-webkit-transition: background .5s ease;
+	-moz-transition: background .5s ease;
+	-o-transition: background .5s ease;
 }
 h1.header:hover {
 	background: url(logo_hover.png) no-repeat 0 0;
+	
 }
 .user_links {
 	margin: 0 auto 50px;
