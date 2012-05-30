@@ -9,7 +9,7 @@
 				<ul>
 				<% @stories.each do |story| %>
 					<% if story.private_story == false %>
-					<li><%= link_to story.title, story %></li>
+					<li><% if story.is_free_for_all == true %>*<% end %><%= link_to story.title, story %></li>
 					<% end %>
 				<% end %>
 				</ul>
@@ -31,15 +31,16 @@
 			</div><!-- right_list -->
 		<% else %>
 		<p class="hey">Hey! <%= link_to "Sign Up Here", new_user_url %>, or <%= link_to "Log In", new_login_url %> to start writing stories.</p>
-		<h3>Public Stories Open for Contributions:</h3>
+		<h3>Public Stories</h3>
 		<ul>
 		<% @stories.each do |story| %>
 			<% if story.private_story == false %>
-			<li><%= link_to story.title, story %></li>
+			<li><% if story.is_free_for_all == true %>*<% end %><%= link_to story.title, story %></li>
 			<% end %>
 		<% end %>
 		</ul>
 		<% end %>
+		<p>* Story is a free for all</p>
 	</div><!-- #story -->
 	<div class="bottom_pad"></div>
 </div><!-- content -->
@@ -51,6 +52,7 @@
 			<li>Submit a new line to a story</li>
 			<li>Vote on submissions</li>
 			<li>The submission with the majority out of 10 votes is inserted into the story</li>
+			<li>Free for all stories don't require votes on line submissions, so watch out</li>
 			<li>After ten lines, a story is complete</li>
 			<li>A new story will be generated</li>
 		</ul>
