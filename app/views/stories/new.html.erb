@@ -1,5 +1,5 @@
 <div id="content">
-   <h1 id="story_title">Sign Up!</h1>
+   <h1 id="story_title">Start a New Story!</h1>
 	 <div id="story">
 		<%= form_for(@story) do |f| %>
 		  <% if @story.errors.any? %>
@@ -25,6 +25,10 @@
 		  <div class="field">
 			<p style="float:left; margin-right: 20px;  ">Check to make this story a free for all</p>
 		    <%= f.check_box :is_free_for_all, {}, :true, :false %><br />
+		  </div>
+		  <div class="field">
+			<p style="float:left; margin-right: 20px;  ">Check to make this story private</p>
+		    <%= f.check_box :private_story, {}, :true, :false %><br />
 		  </div>
 		  <div class="actions">
 		    <%= f.submit 'Generate Story!' %>

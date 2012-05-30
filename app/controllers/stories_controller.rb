@@ -20,7 +20,9 @@ class StoriesController < ApplicationController
   def create_story
     @story = Story.new
     @story.title = params[:story][:title]
-    @story.private_story = true
+    @story.is_free_for_all = params[:story][:is_free_for_all]
+    @story.private_story = params[:story][:private_story]
+    # @story.private_story = true
     @story.save
     Invite.create story_id: @story.id, user_id: @user.id
     Line.create story_id: @story.id, content: params[:post][:content], user_id: @user.id
