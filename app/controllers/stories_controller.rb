@@ -30,17 +30,23 @@ class StoriesController < ApplicationController
   end
   
   def create_submission
-    submission = Submission.new
-    submission.content = params[:submission][:content]
-    submission.story_id = params[:id]
-    submission.user_id = @user.id
-    submission.votes = 0
-    if submission.save
-      flash[:notice] = "Thanks for submitting"
-      redirect_to story_url
-    else
-      flash[:notice] = "Nice! Now try writing something this time..."
-      redirect_to story_url
+    @story = Story.find_by_id(params[:id])
+      if @story.is_free_for_all == true
+        Line.create content: params[:submission][:content], story_id: params[:id], user_id: @user.id
+        redirect_to story_path
+      else
+      submission = Submission.new
+      submission.content = params[:submission][:content]
+      submission.story_id = params[:id]
+      submission.user_id = @user.id
+      submission.votes = 0
+      if submission.save
+        flash[:notice] = "Thanks for submitting"
+        redirect_to story_url
+      else
+        flash[:notice] = "Nice! Now try writing something this time..."
+        redirect_to story_url
+      end
     end
   end
   
