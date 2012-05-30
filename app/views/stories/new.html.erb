@@ -17,10 +17,14 @@
 		  <div class="field">
 		    <%= f.label :title %><br />
 		    <%= f.text_field :title, id: "title_story"%>
-		  </div>
+		  </div>		
 		  <div class="field">
 			<%= label_tag "First Line Here" %><br />
 		  	<%= text_field :post, :content %>
+		  </div>
+		  <div class="field">
+			<p style="float:left; margin-right: 20px;  ">Check to make this story a free for all</p>
+		    <%= f.check_box :is_free_for_all, {}, :true, :false %><br />
 		  </div>
 		  <div class="actions">
 		    <%= f.submit 'Generate Story!' %>
