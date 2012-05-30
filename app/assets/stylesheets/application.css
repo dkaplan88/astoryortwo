@@ -120,10 +120,16 @@ h1.header:hover {
 .user_links a:hover {
 	color: rgba(0,0,0,.6);
 }
-
+.free_for_all {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	font-size: 16px;
+}
 /* STORY BODY */
 
 #content {
+	position: relative;
 	float: left;
 	font-size: 25px;
 	clear: both;
