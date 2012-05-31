@@ -59,16 +59,13 @@ class StoriesController < ApplicationController
       second_line_vote_count = 0
     end
     
-    votes_needed = Story.invites.count / 2
+
     
     vote_total = 0
     submissions = Submission.by_votes.find_all_by_story_id(params[:id])
     submissions.each do |submission|
     vote_total += submission.votes
     end
-    
-    
-    if @story.private_story == true
       if vote_total == 9 && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
         newlines = Submission.by_vote.find_all_by_story_id(params[:id])
         newline = newlines.first
@@ -102,7 +99,6 @@ class StoriesController < ApplicationController
         submission.save
         redirect_to story_url
       end
-    end
   end
   
   def new
