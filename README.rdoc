@@ -1,1 +1,1 @@
-Check out http://www.astoryortwo.herokuapp.com
+Check out http://astoryortwo.herokuapp.com
