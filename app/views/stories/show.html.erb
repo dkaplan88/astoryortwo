@@ -11,6 +11,8 @@
       <% end %>
     </ul>
 
+<h3>Lines left until completion: <%= @story.lines_left %></h3>
+
     <%= form_for @new_submission do |f| %>
     <%= f.text_field :content %>
     <%= f.submit "Create Line" %>
@@ -63,7 +65,7 @@
 		<ul>
 	  	<% @stories.each do |story| %>
 		<% if story.private_story == false && story.lines.count < 10 %>
-		<li><%= link_to story.title %></li>
+		<li><%= link_to story.title, story_path(story.id) %></li>
 		<% end %>
 		<% end %>
 		</ul>
