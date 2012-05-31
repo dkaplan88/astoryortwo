@@ -1,1 +1,1 @@
-A Story or Two is an interactive storytelling application. We are building collaborative stories.
+Check out http://www.astoryortwo.herokuapp.com

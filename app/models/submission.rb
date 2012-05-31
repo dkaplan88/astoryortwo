@@ -8,6 +8,10 @@ class Submission < ActiveRecord::Base
   validates_presence_of :content
 
 
+  def votes_needed
+    
+  end
+
   # def create_submission
   #   submission = Submission.new
   #   submission.content = params[:submission][:content]
