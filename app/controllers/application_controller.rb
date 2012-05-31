@@ -13,18 +13,20 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, notice: "You must be logged in!"
     end
   end
-  
+
+
+#Should this be in the NewStory.rb model? Something like: NewStory.create_new_story? Confused because the method works with 3 different models.
   def create_new_story
+    newstories = NewStory.all
+    newstories = newstories.shuffle
+    newstory = newstories.first
     story = Story.new
-    @newstories = NewStory.all
-    @newstories = @newstories.shuffle
-    @newstory = @newstories.first
-    story.title = @newstory.title
+    story.title = newstory.title
     story.private_story = false
     story.save
     line = Line.new
     line.story_id = story.id
-    line.content = @newstory.content
+    line.content = newstory.content
     line.save
   end
   # def create_submission

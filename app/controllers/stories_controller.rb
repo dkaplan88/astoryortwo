@@ -59,44 +59,49 @@ class StoriesController < ApplicationController
       second_line_vote_count = 0
     end
     
+    votes_needed = Story.invites.count / 2
+    
     vote_total = 0
     submissions = Submission.by_votes.find_all_by_story_id(params[:id])
     submissions.each do |submission|
     vote_total += submission.votes
     end
     
-    if vote_total == 9 && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
-      newlines = Submission.by_vote.find_all_by_story_id(params[:id])
-      newline = newlines.first
-      line = Line.create :content => newline.content, :story_id => params[:id]
-      Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
-      create_new_story
-      redirect_to story_url
-    elsif top_line_vote_count.to_i >= (10 - vote_total) + second_line_vote_count.to_i && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
-      newlines = Submission.by_votes.find_all_by_story_id(params[:id])
-      newline = newlines.first
-      line = Line.create :content => newline.content, :story_id => params[:id]
-      Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
-      create_new_story
-      redirect_to story_url
-    elsif top_line_vote_count.to_i >= (10 - vote_total) + second_line_vote_count.to_i || vote_total == 9 
-      newlines = Submission.by_votes.find_all_by_story_id(params[:id])
-      newline = newlines.first
-      line = Line.create :content => newline.content, :story_id => params[:id], :user_id => newline.user_id
-      Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
-      redirect_to story_url
-    elsif Submission.find_all_by_story_id(params[:id]).empty? || Submission.find_by_id(params[:submission_id]).nil?
-      #FLASH NOTICE
-      redirect_to story_url
-    elsif Like.find_by_submission_id_and_user_id(params[:submission_id], @user.id)
-        flash[:notice] = "Only 1 vote per submission please"
+    
+    if @story.private_story == true
+      if vote_total == 9 && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
+        newlines = Submission.by_vote.find_all_by_story_id(params[:id])
+        newline = newlines.first
+        line = Line.create :content => newline.content, :story_id => params[:id]
+        Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
+        create_new_story
         redirect_to story_url
-    else
-      submission = Submission.find_by_id(params[:submission_id])
-      Like.create user_id: @user.id, submission_id: submission.id
-      submission.votes = submission.likes.count
-      submission.save
-      redirect_to story_url
+      elsif top_line_vote_count.to_i >= (10 - vote_total) + second_line_vote_count.to_i && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
+        newlines = Submission.by_votes.find_all_by_story_id(params[:id])
+        newline = newlines.first
+        line = Line.create :content => newline.content, :story_id => params[:id]
+        Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
+        create_new_story
+        redirect_to story_url
+      elsif top_line_vote_count.to_i >= (10 - vote_total) + second_line_vote_count.to_i || vote_total == 9 
+        newlines = Submission.by_votes.find_all_by_story_id(params[:id])
+        newline = newlines.first
+        line = Line.create :content => newline.content, :story_id => params[:id], :user_id => newline.user_id
+        Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
+        redirect_to story_url
+      elsif Submission.find_all_by_story_id(params[:id]).empty? || Submission.find_by_id(params[:submission_id]).nil?
+        #FLASH NOTICE
+        redirect_to story_url
+      elsif Like.find_by_submission_id_and_user_id(params[:submission_id], @user.id)
+          flash[:notice] = "Only 1 vote per submission please"
+          redirect_to story_url
+      else
+        submission = Submission.find_by_id(params[:submission_id])
+        Like.create user_id: @user.id, submission_id: submission.id
+        submission.votes = submission.likes.count
+        submission.save
+        redirect_to story_url
+      end
     end
   end
   
