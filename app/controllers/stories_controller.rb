@@ -23,8 +23,12 @@ class StoriesController < ApplicationController
   
   def create_story
     @story = Story.create params[:story]
-    Invite.create story_id: @story.id, user_id: @user.id
     Line.create story_id: @story.id, content: params[:post][:content], user_id: @user.id
+    
+    if @story.private_story == true
+      Invite.create story_id: @story.id, user_id: @user.id
+    end
+    
     redirect_to root_url
   end
   
