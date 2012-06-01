@@ -50,47 +50,56 @@ class StoriesController < ApplicationController
   end
 
   def update
-    @story = Story.find(params[:id])
-    @submissions = Submission.by_votes.find_all_by_story_id(params[:id])
-    @top_submission = @submissions.first
+    story = Story.find(params[:id])
+    submissions = Submission.by_votes.find_all_by_story_id(params[:id])
+    top_submission = submissions.first
+    top_line_vote_count = top_submission.votes
 
-    top_line_vote_count = @top_submission.votes
-    if Submission.find_all_by_story_id(params[:id]).count > 1
-      second_line_vote_count = @submissions[1].votes
+# Gathering Submission with second most votes to run logic to speed up Submission insertion as Line.
+    if story.submissions.count > 1
+      second_line_vote_count = submissions[1].votes
     else
       second_line_vote_count = 0
     end
 
+# Counting the total votes
     vote_total = 0
-    @submissions.each do |submission|
+    submissions.each do |submission|
       vote_total += submission.votes
     end
 
+# When the next vote is going to insert a Submission as a line and complete the story, 
+# this generates a new story (Only for public stories)
     if vote_total == 4 && @story.lines.count == 9 && @story.private_story == false
       @top_submission.enter_as_line
       @story.clear_submissions
       create_new_story
       redirect_to story_url
 
+# When top line is guaranteed to have the most votes, ie: Submission has 6 of 10 votes 
+# && Submission will complete story, this will insert the Submission to the story and create new story
     elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i && @story.lines.count == 9 && @story.private_story == false
       @top_submission.enter_as_line
       @story.clear_submissions
       create_new_story
       redirect_to story_url
 
-    elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i || vote_total == 5
+# When top line is guaranteed to have the most votes, ie: Submission has 6 of 10 votes OR total votes is 5
+    elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i || vote_total == 4
       @top_submission.enter_as_line
       @story.clear_submissions
       redirect_to story_url
 
+# Safeguarding against a nil case submission
     elsif @submissions.empty? || Submission.find_by_id(params[:submission_id]).nil?
       #FLASH NOTICE
       redirect_to story_url
-
+# Prevents user from voting on same submission more than once
     elsif Like.find_by_submission_id_and_user_id(params[:submission_id], @user.id)
       flash[:notice] = "Only 1 vote per submission please"
       redirect_to story_url
 
+# Finally, casts a votes.
     else
       submission = Submission.find_by_id(params[:submission_id])
       Like.create user_id: @user.id, submission_id: submission.id
