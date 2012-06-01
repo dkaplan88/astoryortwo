@@ -1,1 +1,4 @@
 Check out http://astoryortwo.herokuapp.com
+
+
+NewStory.create title: "Elmer Gantry", content: "Elmer Gantry was drunk."
