@@ -66,21 +66,21 @@ class StoriesController < ApplicationController
     submissions.each do |submission|
     vote_total += submission.votes
     end
-      if vote_total == 9 && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
+      if vote_total == 4 && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
         newlines = Submission.by_vote.find_all_by_story_id(params[:id])
         newline = newlines.first
         line = Line.create :content => newline.content, :story_id => params[:id]
         Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
         create_new_story
         redirect_to story_url
-      elsif top_line_vote_count.to_i >= (10 - vote_total) + second_line_vote_count.to_i && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
+      elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i && Line.find_all_by_story_id(params[:id]).count == 9 && @story.private_story == false
         newlines = Submission.by_votes.find_all_by_story_id(params[:id])
         newline = newlines.first
         line = Line.create :content => newline.content, :story_id => params[:id]
         Submission.scoped({:conditions => ['story_id = ?', params[:id]]}).destroy_all
         create_new_story
         redirect_to story_url
-      elsif top_line_vote_count.to_i >= (10 - vote_total) + second_line_vote_count.to_i || vote_total == 9 
+      elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i || vote_total == 9 
         newlines = Submission.by_votes.find_all_by_story_id(params[:id])
         newline = newlines.first
         line = Line.create :content => newline.content, :story_id => params[:id], :user_id => newline.user_id
