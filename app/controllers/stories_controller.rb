@@ -70,28 +70,28 @@ class StoriesController < ApplicationController
 
 # When the next vote is going to insert a Submission as a line and complete the story, 
 # this generates a new story (Only for public stories)
-    if vote_total == 4 && @story.lines.count == 9 && @story.private_story == false
-      @top_submission.enter_as_line
-      @story.clear_submissions
+    if vote_total == 4 && story.lines.count == 9 && story.private_story == false
+      top_submission.enter_as_line
+      story.clear_submissions
       create_new_story
       redirect_to story_url
 
 # When top line is guaranteed to have the most votes, ie: Submission has 6 of 10 votes 
 # && Submission will complete story, this will insert the Submission to the story and create new story
-    elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i && @story.lines.count == 9 && @story.private_story == false
-      @top_submission.enter_as_line
-      @story.clear_submissions
+    elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i && story.lines.count == 9 && story.private_story == false
+      top_submission.enter_as_line
+      story.clear_submissions
       create_new_story
       redirect_to story_url
 
 # When top line is guaranteed to have the most votes, ie: Submission has 6 of 10 votes OR total votes is 5
     elsif top_line_vote_count.to_i >= (5 - vote_total) + second_line_vote_count.to_i || vote_total == 4
-      @top_submission.enter_as_line
-      @story.clear_submissions
+      top_submission.enter_as_line
+      story.clear_submissions
       redirect_to story_url
 
 # Safeguarding against a nil case submission
-    elsif @submissions.empty? || Submission.find_by_id(params[:submission_id]).nil?
+    elsif submissions.empty? || Submission.find_by_id(params[:submission_id]).nil?
       #FLASH NOTICE
       redirect_to story_url
 # Prevents user from voting on same submission more than once
