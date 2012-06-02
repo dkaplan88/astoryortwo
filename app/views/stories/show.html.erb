@@ -34,7 +34,9 @@
       </li>
       <% end %>
     </ul>
+	<% if @story.is_free_for_all? %>
 	<p class="free_for_all">* Story is a free for all. Your submission will go directly into the story, so please play nice.</p>
+	<% end %>
   </div><!-- #story -->
   <div class="bottom_pad"></div>
 </div><!-- #content -->  
