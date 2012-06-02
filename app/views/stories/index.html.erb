@@ -4,7 +4,7 @@
 	    <p class="error"><%= flash[:notice] %></p>
 		
 		<% if @user %>
-			<div class="left_list">
+			<div class="public_list">
 				<h3>Public Stories:</h3>
 				<ul>
 				<% @stories.each do |story| %>
@@ -14,7 +14,7 @@
 				<% end %>
 				</ul>
 			</div><!-- left_list -->
-			<div class="right_list">
+			<div class="private_list">
 				<% if Invite.find_by_user_id(@user.id) %>
 					<h3>Private Stories:</h3>
 				<% else %>
