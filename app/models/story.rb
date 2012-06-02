@@ -21,4 +21,5 @@ class Story < ActiveRecord::Base
   def clear_submissions
     self.submissions.destroy_all
   end
+  
 end

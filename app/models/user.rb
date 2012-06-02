@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
   has_many :stories, :through => :invites
   has_many :likes
   has_secure_password
+  
+  
+  def user_belongs?
+    
+  end
 end
