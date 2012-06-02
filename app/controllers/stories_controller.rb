@@ -38,7 +38,7 @@ class StoriesController < ApplicationController
         Line.create content: params[:submission][:content], story_id: params[:id], user_id: @user.id
         redirect_to story_path
       else
-      Submission.create content: params[:submission][:content], story_id: params[:id], user_id: @user.id, votes: 0
+      submission = Submission.create content: params[:submission][:content], story_id: params[:id], user_id: @user.id, votes: 0
       if submission.save
         flash[:notice] = "Thanks for submitting"
         redirect_to story_url
